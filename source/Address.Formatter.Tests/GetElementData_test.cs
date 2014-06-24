@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using Moq;
 using Xunit;
 
@@ -57,12 +57,9 @@ namespace Address.Formatter.Tests
 
         static AddressFormatElement GetLine1FormatElement()
         {
-            return new AddressFormatElement
-                {
-                    Name = "Line1",
-                    Prefix = "Prefix",
-                    Suffix = "Suffix"
-                };
+            return new AddressFormatBuilder.ElementBuilder()
+                .Element(a => a.Line1, prefix: "Prefix", suffix: "Suffix")
+                .Build().Single();
         }
     }
 }

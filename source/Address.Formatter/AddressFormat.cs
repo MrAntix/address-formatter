@@ -5,7 +5,24 @@ namespace Address.Formatter
     [Serializable]
     public class AddressFormat
     {
-        public string Identifier { get; set; }
-        public AddressFormatLine[] Lines { get; set; }
+        readonly string _identifier;
+        readonly AddressFormatLine[] _lines;
+
+        public AddressFormat(
+            string identifier, AddressFormatLine[] lines)
+        {
+            _identifier = identifier;
+            _lines = lines;
+        }
+
+        public string Identifier
+        {
+            get { return _identifier; }
+        }
+
+        public AddressFormatLine[] Lines
+        {
+            get { return _lines; }
+        }
     }
 }

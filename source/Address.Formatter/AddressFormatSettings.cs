@@ -8,12 +8,12 @@ namespace Address.Formatter
         {
             if (defaultInstance.Formats == null)
             {
-                var builder = new AddressFormatSettingsBuilder();
+                var builder = new AddressFormatBuilder();
                 builder
                     .Add("GB",
-                         f => f.Line(l => l.Element(a => a.PersonTitle, " ")
-                                           .Element(a => a.PersonFirstName, " ")
-                                           .Element(a => a.PersonMiddleName, " ")
+                         f => f.Line(l => l.Element(a => a.PersonTitle)
+                                           .Element(a => a.PersonFirstName)
+                                           .Element(a => a.PersonMiddleName)
                                            .Element(a => a.PersonLastName))
                                .Line(l => l.Element(a => a.CompanyName))
                                .Line(l => l.Element(a => a.Line1))
@@ -25,9 +25,9 @@ namespace Address.Formatter
                                .Line(l => l.Element(a => a.PostalCode, toUppercase: true))
                     )
                     .Add("NL",
-                         f => f.Line(l => l.Element(a => a.PersonTitle, " ")
-                                           .Element(a => a.PersonFirstName, " ")
-                                           .Element(a => a.PersonMiddleName, " ")
+                         f => f.Line(l => l.Element(a => a.PersonTitle)
+                                           .Element(a => a.PersonFirstName)
+                                           .Element(a => a.PersonMiddleName)
                                            .Element(a => a.PersonLastName))
                                .Line(l => l.Element(a => a.CompanyName))
                                .Line(l => l.Element(a => a.Line1))

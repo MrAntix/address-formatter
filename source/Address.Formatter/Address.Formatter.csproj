@@ -53,7 +53,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>AddressFormatSettings.settings</DependentUpon>
     </Compile>
-    <Compile Include="AddressFormatSettingsBuilder.cs" />
+    <Compile Include="AddressFormatBuilder.cs" />
     <Compile Include="AddressFormatter.cs" />
     <Compile Include="AddressFormatSettings.cs" />
     <Compile Include="IAddress.cs" />

@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Linq;
 using Moq;
 using Xunit;
 
@@ -13,7 +13,7 @@ namespace Address.Formatter.Tests
             Assert.Null(
                 AddressFormatter.GetLineData(
                     GetFormatLine(),
-                    GetAddress(null, null)
+                    GetAddress(null, null, null, null)
                     ));
         }
 
@@ -23,7 +23,7 @@ namespace Address.Formatter.Tests
             Assert.Null(
                 AddressFormatter.GetLineData(
                     GetFormatLine(),
-                    GetAddress(string.Empty, string.Empty)
+                    GetAddress(string.Empty, string.Empty, string.Empty, string.Empty)
                     ));
         }
 
@@ -33,7 +33,7 @@ namespace Address.Formatter.Tests
             Assert.Null(
                 AddressFormatter.GetLineData(
                     GetFormatLine(),
-                    GetAddress(" ", " ")
+                    GetAddress(" ", " ", " ", " ")
                     ));
         }
 
@@ -41,10 +41,10 @@ namespace Address.Formatter.Tests
         public void returns_line_any_not_null_empty_or_whitespace()
         {
             Assert.Equal(
-                "PrefixSecond LineSuffix" + Environment.NewLine,
+                "PrefixXXXXSuffix" + Environment.NewLine,
                 AddressFormatter.GetLineData(
                     GetFormatLine(),
-                    GetAddress(string.Empty, "Second Line")
+                    GetAddress(string.Empty, "XXXX", null, null)
                     ));
         }
 
@@ -56,40 +56,43 @@ namespace Address.Formatter.Tests
                 GetAddress()
                 );
 
-            Assert.Equal("PrefixLine1SuffixPrefixLine2Suffix" + Environment.NewLine, result);
+            Assert.Equal("PrefixTitleSuffix PrefixFirstNameSuffix PrefixMiddleNameSuffix PrefixLastNameSuffix" + Environment.NewLine, result);
+        }
+
+        [Fact]
+        public void no_double_separator_when_element_null()
+        {
+            var result = AddressFormatter.GetLineData(
+                GetFormatLine(),
+                GetAddress(middleName:null)
+                );
+
+            Assert.Equal("PrefixTitleSuffix PrefixFirstNameSuffix PrefixLastNameSuffix" + Environment.NewLine, result);
         }
 
         static IAddress GetAddress(
-            string line1 = "Line1",
-            string line2 = "Line2")
+            string title = "Title",
+            string firstName = "FirstName",
+            string middleName = "MiddleName",
+            string lastName = "LastName")
         {
             var mock = new Mock<IAddress>();
-            mock.SetupGet(o => o.Line1).Returns(line1);
-            mock.SetupGet(o => o.Line2).Returns(line2);
+            mock.SetupGet(o => o.PersonTitle).Returns(title);
+            mock.SetupGet(o => o.PersonFirstName).Returns(firstName);
+            mock.SetupGet(o => o.PersonMiddleName).Returns(middleName);
+            mock.SetupGet(o => o.PersonLastName).Returns(lastName);
 
             return mock.Object;
         }
 
         static AddressFormatLine GetFormatLine()
         {
-            return new AddressFormatLine
-                {
-                    Elements = new[]
-                        {
-                            new AddressFormatElement
-                                {
-                                    Name = "Line1",
-                                    Prefix = "Prefix",
-                                    Suffix = "Suffix"
-                                },
-                            new AddressFormatElement
-                                {
-                                    Name = "Line2",
-                                    Prefix = "Prefix",
-                                    Suffix = "Suffix"
-                                }
-                        }
-                };
+            return new AddressFormatBuilder.LineBuilder()
+                .Line(e => e.Element(a => a.PersonTitle, prefix: "Prefix", suffix: "Suffix")
+                            .Element(a => a.PersonFirstName, prefix: "Prefix", suffix: "Suffix")
+                            .Element(a => a.PersonMiddleName, prefix: "Prefix", suffix: "Suffix")
+                            .Element(a => a.PersonLastName, prefix: "Prefix", suffix: "Suffix"))
+                .Build().Single();
         }
     }
 }

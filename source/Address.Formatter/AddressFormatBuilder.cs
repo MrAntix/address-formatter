@@ -5,12 +5,12 @@ using System.Linq.Expressions;
 
 namespace Address.Formatter
 {
-    public class AddressFormatSettingsBuilder
+    public class AddressFormatBuilder
     {
         readonly IList<Func<AddressFormat>> _builders
             = new List<Func<AddressFormat>>();
 
-        public AddressFormatSettingsBuilder Add(
+        public AddressFormatBuilder Add(
             string identifier, Action<LineBuilder> action)
         {
             _builders.Add(
@@ -20,10 +20,10 @@ namespace Address.Formatter
                         action(lineBuilder);
 
                         return new AddressFormat
-                            {
-                                Identifier = identifier,
-                                Lines = lineBuilder.Build().ToArray()
-                            };
+                            (
+                            identifier,
+                            lineBuilder.Build().ToArray()
+                            );
                     });
 
             return this;
@@ -39,7 +39,10 @@ namespace Address.Formatter
             readonly IList<Func<AddressFormatLine>> _builders
                 = new List<Func<AddressFormatLine>>();
 
-            public LineBuilder Line(Action<ElementBuilder> action)
+            public LineBuilder Line(Action<ElementBuilder> action,
+                                    string elementSeparator = " ",
+                                    string prefix = null, string suffix = null,
+                                    bool trim = true)
             {
                 _builders.Add(
                     () =>
@@ -47,10 +50,13 @@ namespace Address.Formatter
                             var elementBuilder = new ElementBuilder();
                             action(elementBuilder);
 
-                            return new AddressFormatLine
-                                {
-                                    Elements = elementBuilder.Build().ToArray()
-                                };
+                            return new AddressFormatLine(
+                                elementBuilder.Build().ToArray(),
+                                elementSeparator,
+                                prefix,
+                                suffix,
+                                trim
+                                );
                         });
                 return this;
             }
@@ -67,26 +73,21 @@ namespace Address.Formatter
                 = new List<Func<AddressFormatElement>>();
 
             public ElementBuilder Element(
-                string prefix, Expression<Func<IAddress, string>> property, string suffix,
-                bool toUppercase)
+                Expression<Func<IAddress, string>> property,
+                string prefix = null, string suffix = null,
+                bool trim = true, bool toUppercase = false)
             {
                 _builders.Add(
-                    () => new AddressFormatElement
-                        {
-                            Name = ((MemberExpression) property.Body).Member.Name,
-                            Prefix = prefix,
-                            Suffix = suffix,
-                            ToUppercase = toUppercase
-                        });
+                    () => new AddressFormatElement(
+                              ((MemberExpression) property.Body).Member.Name,
+                              prefix,
+                              suffix,
+                              trim,
+                              toUppercase
+                              )
+                    );
 
                 return this;
-            }
-
-            public ElementBuilder Element(
-                Expression<Func<IAddress, string>> property, string suffix = null,
-                bool toUppercase = false)
-            {
-                return Element(null, property, suffix, toUppercase);
             }
 
             public IEnumerable<AddressFormatElement> Build()

@@ -7,49 +7,15 @@ namespace Address.Formatter.Tests
 {
     public class AddressFormatter_test
     {
-        readonly IEnumerable<AddressFormat> _formats =
-            new[]
-                {
-                    new AddressFormat
-                        {
-                            Identifier = IDENTIFIER,
-                            Lines = new[]
-                                {
-                                    new AddressFormatLine
-                                        {
-                                            Elements = new[]
-                                                {
-                                                    new AddressFormatElement
-                                                        {
-                                                            Name = "Line1",
-                                                            Prefix = "Prefix",
-                                                            Suffix = "Suffix"
-                                                        }
-                                                }
-                                        },
-                                    new AddressFormatLine
-                                        {
-                                            Elements = new[]
-                                                {
-                                                    new AddressFormatElement
-                                                        {
-                                                            Name = "City",
-                                                            Prefix = "Prefix",
-                                                            Suffix = "Suffix"
-                                                        },
-                                                    new AddressFormatElement
-                                                        {
-                                                            Prefix = "Prefix",
-                                                            Suffix = "Suffix",
-                                                            Name = "PostalCode"
-                                                        }
-                                                }
-                                        }
-                                }
-                        }
-                };
-
         const string IDENTIFIER = "IDENTIFIER";
+
+        readonly IEnumerable<AddressFormat> _formats =
+            new AddressFormatBuilder()
+                .Add(IDENTIFIER,
+                     l => l.Line(e => e.Element(a => a.Line1, prefix: "Prefix", suffix: "Suffix"))
+                           .Line(e => e.Element(a => a.City, prefix: "Prefix", suffix: "Suffix")
+                                       .Element(a => a.PostalCode, prefix: "Prefix", suffix: "Suffix")))
+                .Build();
 
         [Fact]
         public void formats_address()
@@ -67,7 +33,7 @@ namespace Address.Formatter.Tests
 
             Assert.Equal(
                 "PrefixLine1Suffix" + Environment.NewLine
-                + "PrefixCitySuffixPrefixPostalCodeSuffix",
+                + "PrefixCitySuffix PrefixPostalCodeSuffix",
                 result
                 );
         }

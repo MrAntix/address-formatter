@@ -7,7 +7,7 @@ namespace Address.Formatter
     public class AddressFormatter
     {
         readonly IDictionary<string, AddressFormat> _formats;
-        
+
         public AddressFormatter(IEnumerable<AddressFormat> formats)
         {
             _formats = formats
@@ -26,36 +26,44 @@ namespace Address.Formatter
         }
 
         public static string GetLineData(
-            AddressFormatLine line, IAddress address)
+            AddressFormatLine format, IAddress address)
         {
-            if (line == null) throw new ArgumentNullException("line");
+            if (format == null) throw new ArgumentNullException("format");
             if (address == null) throw new ArgumentNullException("address");
 
             var data = string.Join(
-                string.Empty,
-                line.Elements
-                    .Select(element => GetElementData(element, address)));
+                format.ElementSeparator,
+                format.Elements
+                      .Select(element => GetElementData(element, address))
+                      .Where(d => !string.IsNullOrWhiteSpace(d)));
 
-            return string.IsNullOrWhiteSpace(data)
-                       ? null
-                       : string.Concat(data, Environment.NewLine);
+            if (string.IsNullOrWhiteSpace(data)) return null;
+
+            if (format.Trim) data = data.Trim();
+
+            return string.Format("{0}{1}{2}{3}",
+                                 format.Prefix,
+                                 data.Trim(),
+                                 format.Suffix,
+                                 Environment.NewLine);
         }
 
         public static string GetElementData(
-            AddressFormatElement element, IAddress address)
+            AddressFormatElement format, IAddress address)
         {
-            if (element == null) throw new ArgumentNullException("element");
+            if (format == null) throw new ArgumentNullException("format");
             if (address == null) throw new ArgumentNullException("address");
 
-            var data = GetElementData(element.Name, address);
+            var data = GetElementData(format.Name, address);
             if (string.IsNullOrWhiteSpace(data)) return null;
 
-            if (element.ToUppercase) data = data.ToUpper();
+            if (format.ToUppercase) data = data.ToUpper();
+            if (format.Trim) data = data.Trim();
 
             return string.Format("{0}{1}{2}",
-                                 element.Prefix,
+                                 format.Prefix,
                                  data,
-                                 element.Suffix
+                                 format.Suffix
                 );
         }
 
