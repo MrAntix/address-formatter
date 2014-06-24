@@ -48,6 +48,7 @@
     <Compile Include="AddressFormatter_test.cs" />
     <Compile Include="GetElementData_test.cs" />
     <Compile Include="GetFormatOrDefault_test.cs" />
+    <Compile Include="GetLineData_test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
