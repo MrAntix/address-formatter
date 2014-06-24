@@ -1,0 +1,37 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Address.Formatter" GeneratedClassName="AddressFormatSettings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Formats" Type="System.Collections.Generic.List`1[Address.Formatter.AddressFormat]" Scope="Application">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfAddressFormat xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;AddressFormat&gt;
+    &lt;Identifier&gt;gb&lt;/Identifier&gt;
+    &lt;Lines&gt;
+      &lt;AddressFormatLine&gt;
+        &lt;Elements&gt;
+          &lt;AddressFormatElement&gt;
+            &lt;Name&gt;Line1&lt;/Name&gt;
+          &lt;/AddressFormatElement&gt;
+        &lt;/Elements&gt;
+      &lt;/AddressFormatLine&gt;
+      &lt;AddressFormatLine&gt;
+        &lt;Elements&gt;
+          &lt;AddressFormatElement&gt;
+            &lt;Name&gt;Line2&lt;/Name&gt;
+          &lt;/AddressFormatElement&gt;
+        &lt;/Elements&gt;
+      &lt;/AddressFormatLine&gt;
+      &lt;AddressFormatLine&gt;
+        &lt;Elements&gt;
+          &lt;AddressFormatElement&gt;
+            &lt;Name&gt;Line3&lt;/Name&gt;
+          &lt;/AddressFormatElement&gt;
+        &lt;/Elements&gt;
+      &lt;/AddressFormatLine&gt;
+    &lt;/Lines&gt;
+  &lt;/AddressFormat&gt;
+&lt;/ArrayOfAddressFormat&gt;</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

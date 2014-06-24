@@ -7,7 +7,7 @@ namespace Address.Formatter
     public class AddressFormatter
     {
         readonly IDictionary<string, AddressFormat> _formats;
-
+        
         public AddressFormatter(IEnumerable<AddressFormat> formats)
         {
             _formats = formats
@@ -42,19 +42,56 @@ namespace Address.Formatter
         }
 
         public static string GetElementData(
-            AddressFormatElement format, IAddress address)
+            AddressFormatElement element, IAddress address)
         {
-            if (format == null) throw new ArgumentNullException("format");
+            if (element == null) throw new ArgumentNullException("element");
             if (address == null) throw new ArgumentNullException("address");
 
-            var data = format.GetElementData(address);
+            var data = GetElementData(element.Name, address);
             if (string.IsNullOrWhiteSpace(data)) return null;
 
+            if (element.ToUppercase) data = data.ToUpper();
+
             return string.Format("{0}{1}{2}",
-                                 format.Prefix,
+                                 element.Prefix,
                                  data,
-                                 format.Suffix
+                                 element.Suffix
                 );
+        }
+
+        static string GetElementData(
+            string name, IAddress address)
+        {
+            switch (name)
+            {
+                default:
+                    throw new NotSupportedException(name);
+
+                case "PersonTitle":
+                    return address.PersonTitle;
+                case "PersonFirstName":
+                    return address.PersonFirstName;
+                case "PersonMiddleName":
+                    return address.PersonMiddleName;
+                case "PersonLastName":
+                    return address.PersonLastName;
+                case "CompanyName":
+                    return address.CompanyName;
+                case "Line1":
+                    return address.Line1;
+                case "Line2":
+                    return address.Line2;
+                case "Line3":
+                    return address.Line3;
+                case "City":
+                    return address.City;
+                case "State":
+                    return address.State;
+                case "CountryName":
+                    return address.CountryName;
+                case "PostalCode":
+                    return address.PostalCode;
+            }
         }
 
         public static AddressFormat GetFormatOrDefault(

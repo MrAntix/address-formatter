@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Xunit;
 
 namespace Address.Formatter.Tests
@@ -89,6 +90,27 @@ namespace Address.Formatter.Tests
                 + "PrefixPostalCodeSuffix",
                 result
                 );
+        }
+
+        [Fact]
+        public void formatter_with_defaults()
+        {
+            var service = new AddressFormatter(AddressFormatSettings.Default.Formats);
+
+            Debug.Write(service.Format(
+                new Address
+                    {
+                        FormatIdentifier = "GB",
+                        PersonTitle = "Mr",
+                        PersonFirstName = "Harry",
+                        PersonLastName = "Rashburn",
+                        CompanyName = "Antix Software",
+                        Line1 = "Itchington House",
+                        Line2 = "Some Street",
+                        City = "London",
+                        PostalCode = "ab1 1ab",
+                        CountryName = "United Kingdom"
+                    }));
         }
 
         public class Address : IAddress
