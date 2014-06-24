@@ -11,10 +11,11 @@ namespace Address.Formatter.Tests
 
         readonly IEnumerable<AddressFormat> _formats =
             new AddressFormatBuilder()
-                .Add(IDENTIFIER,
-                     l => l.Line(e => e.Element(a => a.Line1, prefix: "Prefix", suffix: "Suffix"))
-                           .Line(e => e.Element(a => a.City, prefix: "Prefix", suffix: "Suffix")
-                                       .Element(a => a.PostalCode, prefix: "Prefix", suffix: "Suffix")))
+                .Address(
+                    l => l.Line(e => e.Element(a => a.Line1, prefix: "Prefix", suffix: "Suffix"))
+                          .Line(e => e.Element(a => a.City, prefix: "Prefix", suffix: "Suffix")
+                                      .Element(a => a.PostalCode, prefix: "Prefix", suffix: "Suffix")),
+                    IDENTIFIER)
                 .Build();
 
         [Fact]
@@ -75,6 +76,7 @@ namespace Address.Formatter.Tests
                         Line2 = "Some Street",
                         City = "London",
                         PostalCode = "ab1 1ab",
+                        CountryCode = "GB",
                         CountryName = "United Kingdom"
                     }));
         }
@@ -91,6 +93,7 @@ namespace Address.Formatter.Tests
             public string Line3 { get; set; }
             public string City { get; set; }
             public string State { get; set; }
+            public string CountryCode { get; set; }
             public string CountryName { get; set; }
             public string PostalCode { get; set; }
             public string FormatIdentifier { get; set; }

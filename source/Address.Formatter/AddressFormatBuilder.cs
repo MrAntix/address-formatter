@@ -10,8 +10,9 @@ namespace Address.Formatter
         readonly IList<Func<AddressFormat>> _builders
             = new List<Func<AddressFormat>>();
 
-        public AddressFormatBuilder Add(
-            string identifier, Action<LineBuilder> action)
+        public AddressFormatBuilder Address(
+            Action<LineBuilder> action, 
+            string identifier, params string[] identifiers)
         {
             _builders.Add(
                 () =>
@@ -21,7 +22,7 @@ namespace Address.Formatter
 
                         return new AddressFormat
                             (
-                            identifier,
+                            new[] {identifier}.Concat(identifiers).ToArray(),
                             lineBuilder.Build().ToArray()
                             );
                     });

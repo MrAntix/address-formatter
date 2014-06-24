@@ -10,8 +10,14 @@ namespace Address.Formatter
 
         public AddressFormatter(IEnumerable<AddressFormat> formats)
         {
-            _formats = formats
-                .ToDictionary(o => o.Identifier);
+            _formats = (from format in formats
+                        from identifier in format.Identifiers
+                        select new
+                            {
+                                key = identifier,
+                                value = format
+                            })
+                .ToDictionary(o => o.key, o => o.value);
         }
 
         public string Format(IAddress address)
@@ -95,6 +101,8 @@ namespace Address.Formatter
                     return address.City;
                 case "State":
                     return address.State;
+                case "CountryCode":
+                    return address.CountryCode;
                 case "CountryName":
                     return address.CountryName;
                 case "PostalCode":

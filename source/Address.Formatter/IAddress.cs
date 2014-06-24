@@ -14,6 +14,7 @@
         string Line3 { get; }
         string City { get; }
         string State { get; }
+        string CountryCode { get; }
         string CountryName { get; }
         string PostalCode { get; }
 

@@ -5,19 +5,19 @@ namespace Address.Formatter
     [Serializable]
     public class AddressFormat
     {
-        readonly string _identifier;
+        readonly string[] _identifiers;
         readonly AddressFormatLine[] _lines;
 
         public AddressFormat(
-            string identifier, AddressFormatLine[] lines)
+            string[] identifiers, AddressFormatLine[] lines)
         {
-            _identifier = identifier;
+            _identifiers = identifiers;
             _lines = lines;
         }
 
-        public string Identifier
+        public string[] Identifiers
         {
-            get { return _identifier; }
+            get { return _identifiers; }
         }
 
         public AddressFormatLine[] Lines
