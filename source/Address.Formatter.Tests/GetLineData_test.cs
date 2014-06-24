@@ -11,8 +11,8 @@ namespace Address.Formatter.Tests
         {
             Assert.Null(
                 AddressFormatter.GetLineData(
-                    GetLine1FormatLine(),
-                    GetAddress(null)
+                    GetFormatLine(),
+                    GetAddress(null, null)
                     ));
         }
 
@@ -21,8 +21,8 @@ namespace Address.Formatter.Tests
         {
             Assert.Null(
                 AddressFormatter.GetLineData(
-                    GetLine1FormatLine(),
-                    GetAddress(string.Empty)
+                    GetFormatLine(),
+                    GetAddress(string.Empty, string.Empty)
                     ));
         }
 
@@ -31,8 +31,19 @@ namespace Address.Formatter.Tests
         {
             Assert.Null(
                 AddressFormatter.GetLineData(
-                    GetLine1FormatLine(),
-                    GetAddress(" ")
+                    GetFormatLine(),
+                    GetAddress(" ", " ")
+                    ));
+        }
+
+        [Fact]
+        public void returns_line_any_not_null_empty_or_whitespace()
+        {
+            Assert.Equal(
+                "PrefixSecond LineSuffix" + Environment.NewLine,
+                AddressFormatter.GetLineData(
+                    GetFormatLine(),
+                    GetAddress(string.Empty, "Second Line")
                     ));
         }
 
@@ -40,22 +51,25 @@ namespace Address.Formatter.Tests
         public void adds_new_line()
         {
             var result = AddressFormatter.GetLineData(
-                GetLine1FormatLine(),
+                GetFormatLine(),
                 GetAddress()
                 );
 
-            Assert.Equal("PrefixLine1Suffix" + Environment.NewLine, result);
+            Assert.Equal("PrefixLine1SuffixPrefixLine2Suffix" + Environment.NewLine, result);
         }
 
-        static IAddress GetAddress(string line1 = "Line1")
+        static IAddress GetAddress(
+            string line1 = "Line1",
+            string line2 = "Line2")
         {
             var mock = new Mock<IAddress>();
             mock.SetupGet(o => o.Line1).Returns(line1);
+            mock.SetupGet(o => o.Line2).Returns(line2);
 
             return mock.Object;
         }
 
-        static AddressFormatLine GetLine1FormatLine()
+        static AddressFormatLine GetFormatLine()
         {
             return new AddressFormatLine
                 {
@@ -64,6 +78,12 @@ namespace Address.Formatter.Tests
                             new AddressFormatElement
                                 {
                                     Name = "Line1",
+                                    Prefix = "Prefix",
+                                    Suffix = "Suffix"
+                                },
+                            new AddressFormatElement
+                                {
+                                    Name = "Line2",
                                     Prefix = "Prefix",
                                     Suffix = "Suffix"
                                 }
