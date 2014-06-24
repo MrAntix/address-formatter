@@ -7,7 +7,6 @@ namespace Address.Formatter
         public string Name { get; set; }
         public string Prefix { get; set; }
         public string Suffix { get; set; }
-        public bool NewLine { get; set; }
 
         public string GetElementData(IAddress address)
         {

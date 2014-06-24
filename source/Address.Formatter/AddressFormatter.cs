@@ -19,10 +19,26 @@ namespace Address.Formatter
             var format = GetFormatOrDefault(address.FormatIdentifier, _formats);
 
             var formattedElements
-                = format.Elements
-                        .Select(o => GetElementData(o, address));
+                = format.Lines
+                        .Select(line => GetLineData(line, address));
 
             return string.Join(string.Empty, formattedElements).Trim();
+        }
+
+        public static string GetLineData(
+            AddressFormatLine line, IAddress address)
+        {
+            if (line == null) throw new ArgumentNullException("line");
+            if (address == null) throw new ArgumentNullException("address");
+
+            var data = string.Join(
+                string.Empty,
+                line.Elements
+                    .Select(element => GetElementData(element, address)));
+
+            return string.IsNullOrWhiteSpace(data)
+                       ? null
+                       : string.Concat(data, Environment.NewLine);
         }
 
         public static string GetElementData(
@@ -34,8 +50,7 @@ namespace Address.Formatter
             var data = format.GetElementData(address);
             if (string.IsNullOrWhiteSpace(data)) return null;
 
-            return string.Format("{0}{1}{2}{3}",
-                                 format.NewLine ? Environment.NewLine : string.Empty,
+            return string.Format("{0}{1}{2}",
                                  format.Prefix,
                                  data,
                                  format.Suffix

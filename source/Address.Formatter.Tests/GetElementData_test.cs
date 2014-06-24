@@ -37,14 +37,14 @@ namespace Address.Formatter.Tests
         }
 
         [Fact]
-        public void adds_new_line_prefix_and_suffix()
+        public void adds_prefix_and_suffix()
         {
             var result = AddressFormatter.GetElementData(
                 GetLine1FormatElement(),
                 GetAddress()
                 );
 
-            Assert.Equal(Environment.NewLine+"PrefixLine1Suffix" , result);
+            Assert.Equal("PrefixLine1Suffix", result);
         }
 
         static IAddress GetAddress(string line1 = "Line1")
@@ -61,8 +61,7 @@ namespace Address.Formatter.Tests
                 {
                     Name = "Line1",
                     Prefix = "Prefix",
-                    Suffix = "Suffix",
-                    NewLine = true
+                    Suffix = "Suffix"
                 };
         }
     }

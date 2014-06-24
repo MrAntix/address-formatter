@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="AddressFormat.cs" />
     <Compile Include="AddressFormatElement.cs" />
+    <Compile Include="AddressFormatLine.cs" />
     <Compile Include="AddressFormatNotFoundException.cs" />
     <Compile Include="AddressFormatResources.Designer.cs">
       <AutoGen>True</AutoGen>
