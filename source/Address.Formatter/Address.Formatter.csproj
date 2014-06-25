@@ -48,11 +48,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AddressFormatResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="AddressFormatSettings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>AddressFormatSettings.settings</DependentUpon>
-    </Compile>
     <Compile Include="AddressFormatBuilder.cs" />
     <Compile Include="AddressFormatter.cs" />
     <Compile Include="AddressFormatSettings.cs" />
@@ -66,11 +61,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="AddressFormatSettings.settings">
-      <Generator>PublicSettingsSingleFileGenerator</Generator>
-      <LastGenOutput>AddressFormatSettings.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

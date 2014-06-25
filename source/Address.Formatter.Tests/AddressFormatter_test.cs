@@ -62,12 +62,12 @@ namespace Address.Formatter.Tests
         [Fact]
         public void formatter_with_defaults()
         {
-            var service = new AddressFormatter(AddressFormatSettings.Default.Formats);
+            var service = new AddressFormatter(AddressFormatSettings.Formats);
 
             Debug.Write(service.Format(
                 new Address
                     {
-                        FormatIdentifier = "GB",
+                        FormatIdentifier = "BR",
                         PersonTitle = "Mr",
                         PersonFirstName = "Harry",
                         PersonLastName = "Rashburn",
