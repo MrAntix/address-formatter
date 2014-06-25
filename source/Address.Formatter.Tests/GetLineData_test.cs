@@ -56,7 +56,9 @@ namespace Address.Formatter.Tests
                 GetAddress()
                 );
 
-            Assert.Equal("PrefixTitleSuffix PrefixFirstNameSuffix PrefixMiddleNameSuffix PrefixLastNameSuffix" + Environment.NewLine, result);
+            Assert.Equal(
+                "PrefixTitleSuffix PrefixFirstNameSuffix PrefixMiddleNameSuffix PrefixLastNameSuffix" +
+                Environment.NewLine, result);
         }
 
         [Fact]
@@ -64,7 +66,7 @@ namespace Address.Formatter.Tests
         {
             var result = AddressFormatter.GetLineData(
                 GetFormatLine(),
-                GetAddress(middleName:null)
+                GetAddress(middleName: null)
                 );
 
             Assert.Equal("PrefixTitleSuffix PrefixFirstNameSuffix PrefixLastNameSuffix" + Environment.NewLine, result);

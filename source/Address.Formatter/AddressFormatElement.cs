@@ -1,8 +1,5 @@
-﻿using System;
-
-namespace Address.Formatter
+﻿namespace Address.Formatter
 {
-    [Serializable]
     public class AddressFormatElement
     {
         readonly string _name;
@@ -12,15 +9,28 @@ namespace Address.Formatter
         readonly bool _toUppercase;
 
         public AddressFormatElement(
-            string name,
-            string prefix, string suffix,
-            bool trim, bool toUppercase)
+            Settings settings)
         {
-            _name = name;
-            _prefix = prefix;
-            _suffix = suffix;
-            _toUppercase = toUppercase;
-            _trim = trim;
+            _name = settings.Name;
+            _prefix = settings.Prefix;
+            _suffix = settings.Suffix;
+            _toUppercase = settings.ToUppercase;
+            _trim = settings.Trim;
+        }
+
+        public class Settings
+        {
+            public Settings()
+            {
+                Trim = true;
+                ToUppercase = false;
+            }
+
+            public string Name { get; set; }
+            public string Prefix { get; set; }
+            public string Suffix { get; set; }
+            public bool Trim { get; set; }
+            public bool ToUppercase { get; set; }
         }
 
         public string Name

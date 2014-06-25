@@ -10,7 +10,7 @@ namespace Address.Formatter.Tests
         [Fact]
         public void returns_format_by_identifier()
         {
-            var format = new AddressFormat(null, null);
+            var format = new AddressFormat(new AddressFormat.Settings {Identifiers = new[] {IDENTIFIER}});
             var result = AddressFormatter
                 .GetFormatOrDefault(
                     IDENTIFIER,
@@ -25,7 +25,7 @@ namespace Address.Formatter.Tests
         [Fact]
         public void returns_default_format()
         {
-            var format = new AddressFormat(null, null);
+            var format = new AddressFormat(new AddressFormat.Settings {Identifiers = new[] {string.Empty}});
             var result = AddressFormatter
                 .GetFormatOrDefault(
                     IDENTIFIER,
