@@ -128,6 +128,9 @@
     </Content>
     <Content Include="Content\Site.less" />
     <Content Include="Content\bootstrap.less" />
+    <Content Include="Content\variables.css">
+      <DependentUpon>variables.less</DependentUpon>
+    </Content>
     <Content Include="Content\variables.less" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
@@ -175,6 +178,9 @@
     <None Include="Index.cshtml" />
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.less</DependentUpon>
+    </Content>
+    <Content Include="Content\variables.min.css">
+      <DependentUpon>variables.less</DependentUpon>
     </Content>
     <Content Include="Global.asax" />
     <Content Include="Scripts\angular-animate.js" />
