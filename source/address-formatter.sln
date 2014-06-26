@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Address.Formatter", "Addres
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Address.Formatter.Tests", "Address.Formatter.Tests\Address.Formatter.Tests.csproj", "{2BC7E403-B8FB-41E1-8447-3FA881013489}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Address.Formatter.Admin", "Address.Formatter.Admin\Address.Formatter.Admin.csproj", "{579BB7FB-0C1E-4ABF-90E5-FF7975489CD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{2BC7E403-B8FB-41E1-8447-3FA881013489}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BC7E403-B8FB-41E1-8447-3FA881013489}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BC7E403-B8FB-41E1-8447-3FA881013489}.Release|Any CPU.Build.0 = Release|Any CPU
+		{579BB7FB-0C1E-4ABF-90E5-FF7975489CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{579BB7FB-0C1E-4ABF-90E5-FF7975489CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{579BB7FB-0C1E-4ABF-90E5-FF7975489CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{579BB7FB-0C1E-4ABF-90E5-FF7975489CD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
