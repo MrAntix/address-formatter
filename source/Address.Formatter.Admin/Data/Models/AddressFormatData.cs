@@ -5,9 +5,12 @@ namespace Address.Formatter.Admin.Data.Models
 {
     public class AddressFormatData
     {
+        public AddressFormatData()
+        {
+            Countries = new List<CountryData>();
+        }
+
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
 
         public List<CountryData> Countries { get; set; }
 
@@ -17,8 +20,6 @@ namespace Address.Formatter.Admin.Data.Models
             {
                 ToTable("AddressFormats");
 
-                Property(o => o.Name).HasMaxLength(50);
-                Property(o => o.Description).HasMaxLength(400);
                 HasMany(o => o.Countries).WithMany();
             }
         }

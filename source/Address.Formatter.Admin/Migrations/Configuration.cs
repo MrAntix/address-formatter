@@ -28,6 +28,16 @@ namespace Address.Formatter.Admin.Migrations
                                                     })
                                                 .ToArray()
                 );
+
+            if (context.AddressFormats.All(o => o.Countries.Any()))
+            {
+                context.AddressFormats
+                       .Add(
+                           new AddressFormatData()
+                    );
+            }
+
+            context.SaveChanges();
         }
     }
 }
