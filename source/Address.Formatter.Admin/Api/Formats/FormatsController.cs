@@ -22,10 +22,12 @@ namespace Address.Formatter.Admin.Api.Formats
         {
             var data = await _dataContext.AddressFormats
                                          .Include(d => d.Countries)
+                                         .Include(d => d.Lines.Select(dl => dl.Elements))
                                          .ToArrayAsync();
 
             return data
-                .Select(d=>new AddressFormat(d))
+                .Select(d => d.ToModel())
+                .OrderBy(d => d.Display)
                 .ToArray();
         }
     }

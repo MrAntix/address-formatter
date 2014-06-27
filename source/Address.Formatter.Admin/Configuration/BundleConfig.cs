@@ -28,6 +28,7 @@ namespace Address.Formatter.Admin.Configuration
                     .Include("~/Scripts/angular-ui/ui-bootstrap.js")
                     .Include("~/Scripts/angular-ui/ui-bootstrap-tpls.js")
                     .Include("~/Scripts/angularUI/ui-router.js")
+                    .Include("~/Scripts/angular-draganddrop.js")
                     .Include("~/Client/App.js")
                     .IncludeDirectory("~/Client", "*.js", true)
                 );

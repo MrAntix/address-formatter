@@ -1,4 +1,44 @@
-﻿body {
+﻿@import "variables.less";
+
+body {
 
     padding-top:60px;
+}
+
+.lines>div{
+    margin-bottom:-1px;
+}
+    .lines > div .input-group-addon {
+        border-radius: 0;
+    }
+    .lines > div:first-child .input-group-addon:first-child {
+        border-top-left-radius: @border-radius-base;
+    }
+    .lines > div:first-child .input-group-addon:last-child {
+        border-top-right-radius:@border-radius-base;
+    }
+    .lines > div:last-child .input-group-addon:first-child {
+        border-bottom-left-radius: @border-radius-base;
+    }
+    .lines > div:last-child .input-group-addon:last-child {
+        border-bottom-right-radius: @border-radius-base;
+    }
+
+.line{
+    height:auto;
+    min-height:44px;
+}
+
+
+.element{
+    cursor:pointer;
+    float:left;
+    border-radius:@border-radius-base;
+    margin:2px;
+    padding:@padding-small-vertical;
+
+    background-color:@panel-info-heading-bg;
+    color:@panel-info-text;
+
+    font-size:.8em;
 }

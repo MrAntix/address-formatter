@@ -2,7 +2,8 @@
 
 angular.module('formatsModule', [
     'formatsServiceModule',
-    'formatsListDirectiveModule'
+    'formatsListDirectiveModule',
+    'formatsEditDirectiveModule'
 ])
     .controller(
         'formatsController',

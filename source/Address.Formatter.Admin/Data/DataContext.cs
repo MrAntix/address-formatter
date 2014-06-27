@@ -7,5 +7,7 @@ namespace Address.Formatter.Admin.Data
     {
         public DbSet<CountryData> Countries { get; set; }
         public DbSet<AddressFormatData> AddressFormats { get; set; }
+        public DbSet<AddressFormatLineData> AddressFormatLines { get; set; }
+        public DbSet<AddressFormatElementData> AddressFormatElements { get; set; }
     }
 }

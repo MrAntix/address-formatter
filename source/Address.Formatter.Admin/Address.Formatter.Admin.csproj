@@ -109,6 +109,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Client\formats\formats-edit.cshtml" />
+    <Content Include="Client\formats\formats-edit-directive.js" />
     <Content Include="Client\formats\formats-service.js" />
     <Content Include="Client\formats\formats-list.html" />
     <Content Include="Client\formats\formats-list-directive.js" />
@@ -188,6 +190,7 @@
     <Content Include="Scripts\angular-cookies.js" />
     <Content Include="Scripts\angular-cookies.min.js" />
     <Content Include="Scripts\angular-csp.css" />
+    <Content Include="Scripts\angular-draganddrop.js" />
     <Content Include="Scripts\angular-loader.js" />
     <Content Include="Scripts\angular-loader.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
@@ -497,11 +500,17 @@
   <ItemGroup>
     <Compile Include="Api\Formats\FormatsController.cs" />
     <Compile Include="Api\Formats\Models\AddressFormat.cs" />
+    <Compile Include="Api\Formats\Models\AddressFormatElement.cs" />
+    <Compile Include="Api\Formats\Models\AddressFormatLine.cs" />
+    <Compile Include="Api\Formats\Models\AddressFormatMapper.cs" />
+    <Compile Include="Api\Formats\Models\Country.cs" />
     <Compile Include="Configuration\BundleConfig.cs" />
     <Compile Include="Configuration\ServiceHttpControllerActivator.cs" />
     <Compile Include="Configuration\WebApiConfig.cs" />
     <Compile Include="Configuration\WindsorConfig.cs" />
     <Compile Include="Data\Models\AddressFormatData.cs" />
+    <Compile Include="Data\Models\AddressFormatElementData.cs" />
+    <Compile Include="Data\Models\AddressFormatLineData.cs" />
     <Compile Include="Data\Models\CountryData.cs" />
     <Compile Include="Data\DataContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -540,7 +549,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resources\CountryResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

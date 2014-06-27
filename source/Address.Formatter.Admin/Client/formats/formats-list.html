@@ -12,7 +12,10 @@
 <div class="form-group">
     <div class="list-group">
         <a class="list-group-item" href
-            ng-repeat="item in items">{{item.display}}
+           ng-repeat="item in items"
+           ng-click="select(item)"
+           ng-class="{active:item==$parent.selected}">
+            {{item.display}}
         </a>
     </div>
 
