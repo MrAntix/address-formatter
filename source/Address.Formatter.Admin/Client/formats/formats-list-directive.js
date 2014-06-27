@@ -5,19 +5,24 @@ angular.module('formatsListDirectiveModule', [
     .directive(
         'formatsList',
         [
-            '$log',
-            function ($log) {
+            '$log', '$timeout',
+            function ($log, $timeout) {
 
                 return {
                     restrict: 'A',
                     replace: false,
                     templateUrl: '/Client/formats/formats-list.html',
                     controller: 'FormatsListController',
-                    link: function (scope, element) {
+                    link: function (scope) {
 
-                        scope.select = function(item) {
+                        scope.select = function (item) {
                             $log.debug('select ' + JSON.stringify(item));
-                            scope.$parent.selected = item;
+
+                            scope.$parent.selected = null;
+
+                            $timeout(function() {
+                                scope.$parent.selected = item;
+                            },250);
                         };
 
                     }

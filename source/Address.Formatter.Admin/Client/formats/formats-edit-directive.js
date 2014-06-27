@@ -14,21 +14,42 @@ angular.module('formatsEditDirectiveModule', [
                     replace: false,
                     templateUrl: '/Client/formats/formats-edit.cshtml',
                     controller: 'FormatsEditController',
-                    link: function (scope) {
+                    link: function (scope, el, a, controller) {
 
-                        scope.drop = function (element, line) {
-                            $log.debug('drop ' + JSON.stringify(element));
+                        scope.drop = function (element, line, before) {
+                            $log.debug('drop');
 
-                            line.elements = line.elements || [];
-                            line.elements.push(element);
+                            var list = line.elements = line.elements || [];
+
+                            if (before) {
+                                list.splice(list.indexOf(before), 0, element);
+                            } else {
+                                list.push(element);
+                            }
+
+                            controller.raiseEdit(scope.$parent.selected);
                         };
 
                         scope.remove = function (element, list) {
+                            $log.debug('remove');
+
                             list.splice(list.indexOf(element), 1);
+
+                            controller.raiseEdit(scope.$parent.selected);
                         };
+
                         scope.clear = function (element, list) {
+                            $log.debug('clear');
+
                             scope.remove(element, list);
                             scope.$parent.selected.allElements.push(element);
+
+                            controller.raiseEdit(scope.$parent.selected);
+                        };
+
+                        scope.delete = function () {
+                            controller.raiseDelete(scope.$parent.selected);
+                            scope.$parent.selected = null;
                         };
                     }
                 };
@@ -37,9 +58,23 @@ angular.module('formatsEditDirectiveModule', [
     .controller(
         'FormatsEditController',
         [
-            '$scope', 'FormatsService',
-            function ($scope, FormatsService) {
+            '$log', '$scope',
+            function ($log, $scope) {
 
-               // $scope.items = FormatsService.query();
+                this.raiseEdit = function (format) {
+                    $log.debug('FormatsEditController.raiseEdit');
+
+                    $scope.$emit(
+                        'FormatEditEvent', format
+                    );
+                };
+
+                this.raiseDelete = function (format) {
+                    $log.debug('FormatsEditController.raiseDelete');
+
+                    $scope.$emit(
+                        'FormatDeleteEvent', format
+                    );
+                };
 
             }]);

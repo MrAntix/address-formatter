@@ -21,6 +21,8 @@ angular.module("ngDragDrop",[])
                     dragHandles,
                     dragTarget;
 
+                var dragClass = attrs.dragClass || "on-drag";
+
                 element.attr("draggable", false);
 
                 attrs.$observe("uiDraggable", function (newValue) {
@@ -65,6 +67,10 @@ angular.module("ngDragDrop",[])
                         e.dataTransfer.setData("text/plain", sendData);
                         e.dataTransfer.effectAllowed = "copyMove";
                         $rootScope.$broadcast("ANGULAR_DRAG_START", sendChannel);
+                        setTimeout(function() {
+
+                            element.addClass(dragClass);
+                        }, 10);
                     }
                     else {
                         e.preventDefault();
@@ -82,6 +88,7 @@ angular.module("ngDragDrop",[])
                             });
                         }
                     }
+                    element.removeClass(dragClass);
                 });
 
 

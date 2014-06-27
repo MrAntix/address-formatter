@@ -499,10 +499,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\Formats\FormatsController.cs" />
+    <Compile Include="Api\Formats\FormatStore.cs" />
+    <Compile Include="Api\Formats\IFormatStore.cs" />
     <Compile Include="Api\Formats\Models\AddressFormat.cs" />
     <Compile Include="Api\Formats\Models\AddressFormatElement.cs" />
     <Compile Include="Api\Formats\Models\AddressFormatLine.cs" />
-    <Compile Include="Api\Formats\Models\AddressFormatMapper.cs" />
+    <Compile Include="Api\Formats\FormatMapper.cs" />
     <Compile Include="Api\Formats\Models\Country.cs" />
     <Compile Include="Configuration\BundleConfig.cs" />
     <Compile Include="Configuration\ServiceHttpControllerActivator.cs" />

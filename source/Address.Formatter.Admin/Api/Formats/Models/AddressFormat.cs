@@ -5,6 +5,13 @@ namespace Address.Formatter.Admin.Api.Formats.Models
 {
     public class AddressFormat
     {
+        public AddressFormat()
+        {
+            Countries = new Country[] {};
+            Lines = new AddressFormatLine[] {};
+            AllElements = new AddressFormatElement[] {};
+        }
+
         public string Display
         {
             get

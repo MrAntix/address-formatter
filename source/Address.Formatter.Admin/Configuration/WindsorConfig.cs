@@ -1,6 +1,7 @@
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Dispatcher;
+using Address.Formatter.Admin.Api.Formats;
 using Address.Formatter.Admin.Data;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
@@ -32,6 +33,10 @@ namespace Address.Formatter.Admin.Configuration
         static void RegisterServices(
             IWindsorContainer container)
         {
+            container.Register(
+                Component.For<IFormatStore, FormatStore>()
+                         .LifestyleTransient()
+                );
         }
 
         static void RegisterWebApi(

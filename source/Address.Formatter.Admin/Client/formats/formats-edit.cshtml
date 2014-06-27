@@ -8,40 +8,42 @@
 
         <div class="form-group">
             <div class="lines col-xs-8">
-                <div class="input-group"
+                <div class="line form-control"
                     ng-repeat="line in $parent.selected.lines">
-                    <span class="input-group-addon">{{$index}}
-                    </span>
-                    <div class="line form-control" ui-on-drop="drop($data,line)">
-                        <div class="element"
-                            ui-draggable="true" drag="element" on-drop-success="remove(element, line.elements)"
-                            ng-repeat="element in line.elements">
+                    {{line.prefix}}
+                    <div class="element"
+                        ui-draggable="true" drag="element"
+                        on-drop-success="remove(element, line.elements)"
+                        ui-on-drop="drop($data,line,element)"
+                        ng-repeat="element in line.elements">
+                        <div>
                             {{element.prefix}}
-                            &lt;{{element.name}}&gt;
-                            {{element.suffix}}
-                            <span aria-hidden="true" 
-                                ng-click="clear(element,line.elements)">&times;</span>
+                        &lt;{{element.name}}&gt;
+                        {{element.suffix}}
+                        <span aria-hidden="true"
+                            ng-click="clear(element,line.elements)">&times;</span>
                         </div>
-                        {{line.separator}}
-                    </div>
-                    <a href class="input-group-addon">&hellip;
-                    </a>
                 </div>
-            </div>
-
-            <div class="col-xs-4">
-                <span class="element"
-                      ui-draggable="true" drag="element" on-drop-success="remove(element,$parent.selected.allElements)"
-                      ng-repeat="element in $parent.selected.allElements">
-                    {{element.prefix}}
-                    &lt;{{element.name}}&gt;
-                    {{element.suffix}}
-                </span>
+                {{line.suffix}}
+                    <div class="element-drop" ui-on-drop="drop($data,line)"></div>
             </div>
         </div>
+
+        <div class="col-xs-4">
+            <div class="element"
+                ui-draggable="true" drag="element" on-drop-success="remove(element,$parent.selected.allElements)"
+                ng-repeat="element in $parent.selected.allElements">
+                <div>
+                    {{element.prefix}}
+                    &lt;{{element.name}}&gt;
+                        {{element.suffix}}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="panel-footer">
-    <button class="btn btn-primary">Save</button>
+    <button class="btn btn-danger" ng-click="delete()">Delete</button>
 </div>
 </div>

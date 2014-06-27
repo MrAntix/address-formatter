@@ -5,6 +5,11 @@ namespace Address.Formatter.Admin.Data.Models
 {
     public class AddressFormatLineData
     {
+        public AddressFormatLineData()
+        {
+            Elements = new List<AddressFormatElementData>();
+        }
+
         public int Id { get; set; }
         public List<AddressFormatElementData> Elements { get; set; }
         public string ElementSeparator { get; set; }

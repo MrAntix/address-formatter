@@ -1,10 +1,11 @@
 ﻿using System.Linq;
+using Address.Formatter.Admin.Api.Formats.Models;
 using Address.Formatter.Admin.Data.Models;
 using Address.Formatter.Admin.Resources;
 
-namespace Address.Formatter.Admin.Api.Formats.Models
+namespace Address.Formatter.Admin.Api.Formats
 {
-    public static class AddressFormatMapper
+    public static class FormatMapper
     {
         public static AddressFormat ToModel(this AddressFormatData data)
         {
@@ -34,7 +35,7 @@ namespace Address.Formatter.Admin.Api.Formats.Models
                          .Concat(
                              Enumerable.Range(1, 10)
                                        .Select(i => new AddressFormatLine())
-                        ).Take(8);
+                        ).Take(10);
             }
 
             return model;

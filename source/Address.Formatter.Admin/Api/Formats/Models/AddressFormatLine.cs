@@ -4,6 +4,11 @@ namespace Address.Formatter.Admin.Api.Formats.Models
 {
     public class AddressFormatLine
     {
+        public AddressFormatLine()
+        {
+            Elements = new AddressFormatElement[] {};
+        }
+
         public IEnumerable<AddressFormatElement> Elements { get; set; }
         public string ElementSeparator { get; set; }
         public string Prefix { get; set; }

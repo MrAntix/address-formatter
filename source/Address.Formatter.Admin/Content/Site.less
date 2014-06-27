@@ -8,37 +8,52 @@ body {
 .lines>div{
     margin-bottom:-1px;
 }
-    .lines > div .input-group-addon {
+    .lines > div {
         border-radius: 0;
     }
-    .lines > div:first-child .input-group-addon:first-child {
+    .lines > div:first-child {
         border-top-left-radius: @border-radius-base;
-    }
-    .lines > div:first-child .input-group-addon:last-child {
         border-top-right-radius:@border-radius-base;
     }
-    .lines > div:last-child .input-group-addon:first-child {
+    .lines > div:last-child{
         border-bottom-left-radius: @border-radius-base;
-    }
-    .lines > div:last-child .input-group-addon:last-child {
         border-bottom-right-radius: @border-radius-base;
     }
 
 .line{
+    position:relative;
     height:auto;
-    min-height:44px;
+    min-height:36px;
+    overflow:auto;
+    padding:2px;
+}
+.line .element{
+    position:relative;
+    z-index:1;
 }
 
-
 .element{
-    cursor:pointer;
-    float:left;
-    border-radius:@border-radius-base;
-    margin:2px;
-    padding:@padding-small-vertical;
+    display:inline-block;
 
-    background-color:@panel-info-heading-bg;
-    color:@panel-info-text;
+    cursor:pointer;
+    margin:2px;
 
     font-size:.8em;
+    white-space:nowrap;
+}
+.element>div{
+    border-radius:@border-radius-base;
+    padding:@padding-small-vertical;
+    background-color:@panel-info-heading-bg;
+    color:@panel-info-text;
+}
+.element.on-drag-hover{
+    padding-left:60px
+}
+.element.on-drag{
+    display:none;
+}
+.element-drop{
+    position:absolute;
+    left:0;top:0;right:0;bottom:0;
 }
