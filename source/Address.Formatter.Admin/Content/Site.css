@@ -1,6 +1,11 @@
 body {
   padding-top: 60px;
 }
+.formats-list .list-group {
+  height: 327px;
+  overflow: auto;
+  overflow-x: hidden;
+}
 .lines > div {
   margin-bottom: -1px;
 }

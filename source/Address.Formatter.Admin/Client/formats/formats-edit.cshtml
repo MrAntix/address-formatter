@@ -7,7 +7,8 @@
     <div class="panel-body">
 
         <div class="form-group">
-            <div class="lines col-xs-8">
+
+            <div class="lines col-xs-9">
                 <div class="line form-control"
                     ng-repeat="line in $parent.selected.lines">
                     {{line.prefix}}
@@ -18,18 +19,23 @@
                         ng-repeat="element in line.elements">
                         <div>
                             {{element.prefix}}
-                        &lt;{{element.name}}&gt;
-                        {{element.suffix}}
-                        <span aria-hidden="true"
-                            ng-click="clear(element,line.elements)">&times;</span>
+                            &lt;{{element.name}}&gt;
+                            {{element.suffix}}
+                            <span aria-hidden="true"
+                                ng-click="clear(element,line.elements)">&times;</span>
                         </div>
-                </div>
-                {{line.suffix}}
+                    </div>
+                    {{line.suffix}}
                     <div class="element-drop" ui-on-drop="drop($data,line)"></div>
+                </div>
             </div>
+            <div class="col-xs-3 well">
+                <h4>Properties</h4>
+            </div>
+
         </div>
 
-        <div class="col-xs-4">
+        <div class="form-group">
             <div class="element"
                 ui-draggable="true" drag="element" on-drop-success="remove(element,$parent.selected.allElements)"
                 ng-repeat="element in $parent.selected.allElements">
@@ -40,10 +46,10 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="panel-footer">
-    <button class="btn btn-danger" ng-click="delete()">Delete</button>
-</div>
+    </div>
+
+    <div class="panel-footer">
+        <button class="btn btn-danger" ng-click="delete()">Delete</button>
+    </div>
 </div>

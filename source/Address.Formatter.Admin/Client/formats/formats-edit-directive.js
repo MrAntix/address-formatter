@@ -49,7 +49,6 @@ angular.module('formatsEditDirectiveModule', [
 
                         scope.delete = function () {
                             controller.raiseDelete(scope.$parent.selected);
-                            scope.$parent.selected = null;
                         };
                     }
                 };
@@ -76,5 +75,12 @@ angular.module('formatsEditDirectiveModule', [
                         'FormatDeleteEvent', format
                     );
                 };
+
+                $scope.$on('FormatDeletedEvent', function (e, format) {
+                    $log.debug('FormatsEditController.FormatDeletedEvent ' + format.id);
+
+                    if ($scope.$parent.selected == format)
+                        $scope.$parent.selected = null;
+                });
 
             }]);

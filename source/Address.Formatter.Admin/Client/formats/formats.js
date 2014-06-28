@@ -15,22 +15,29 @@ angular.module('formatsModule', [
 
                 $scope.$on('FormatEditEvent',
                     function (e, format) {
-                        $log.debug('formatsController.FormatEditEvent' + JSON.stringify(format));
+                        $log.debug('formatsController.FormatEditEvent ' + format.id);
 
                         if (timeoutId) {
                             $timeout.cancel(timeoutId);
                         }
 
                         timeoutId = $timeout(function () {
-                            FormatsService.save(format);
+                            FormatsService.save(format, function (data) {
+                                format.id = data.id;
+                                
+                                $scope.$broadcast('FormatSavedEvent');
+                            });
                         }, 500);
                     });
 
                 $scope.$on('FormatDeleteEvent',
                     function(e, format) {
-                        $log.debug('formatsController.FormatDeleteEvent' + JSON.stringify(format));
+                        $log.debug('formatsController.FormatDeleteEvent '+format.id);
 
-                        FormatsService.delete({ id: format.id });
+                        FormatsService.delete({ id: format.id }, function() {
+                            
+                            $scope.$broadcast('FormatDeletedEvent', format);
+                        });
                     });
             }
         ]);

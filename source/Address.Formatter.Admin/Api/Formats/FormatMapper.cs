@@ -7,6 +7,7 @@ namespace Address.Formatter.Admin.Api.Formats
 {
     public static class FormatMapper
     {
+        const int MAX_LINES = 9;
         public static AddressFormat ToModel(this AddressFormatData data)
         {
             var model = new AddressFormat
@@ -28,14 +29,14 @@ namespace Address.Formatter.Admin.Api.Formats
                     .Select(p => new AddressFormatElement {Name = p})
                     .ToArray();
 
-            if (model.Lines.Count() < 10)
+            if (model.Lines.Count() < MAX_LINES)
             {
                 model.Lines =
                     model.Lines
                          .Concat(
-                             Enumerable.Range(1, 10)
+                             Enumerable.Range(1, MAX_LINES)
                                        .Select(i => new AddressFormatLine())
-                        ).Take(10);
+                        ).Take(MAX_LINES);
             }
 
             return model;

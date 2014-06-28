@@ -29,7 +29,17 @@ namespace Address.Formatter.Admin.Api.Formats
                 .ToArray();
         }
 
-        public async Task Post(AddressFormat model)
+        public async Task<AddressFormat> Get(int id)
+        {
+            var data = id > 0
+                           ? await _store.Query
+                                         .SingleOrDefaultAsync(d => d.Id == id)
+                           : new AddressFormatData();
+
+            return data.ToModel();
+        }
+
+        public async Task<AddressFormat> Post(AddressFormat model)
         {
             var data = default(AddressFormatData);
             if (model.Id > 0)
@@ -44,11 +54,13 @@ namespace Address.Formatter.Admin.Api.Formats
             }
 
             await _store.UpdateAsync(data, model);
+
+            return data.ToModel();
         }
 
         public async Task Delete(int id)
         {
-            await _store.Delete(id);
+            if (id > 0) await _store.Delete(id);
         }
     }
 }
