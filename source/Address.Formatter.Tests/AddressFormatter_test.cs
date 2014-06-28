@@ -68,9 +68,7 @@ namespace Address.Formatter.Tests
                 new Address
                     {
                         FormatIdentifier = "BR",
-                        PersonTitle = "Mr",
-                        PersonFirstName = "Harry",
-                        PersonLastName = "Rashburn",
+                        PersonName = "Mr Harry Rashburn",
                         CompanyName = "Antix Software",
                         Line1 = "Itchington House",
                         Line2 = "Some Street",
@@ -83,10 +81,7 @@ namespace Address.Formatter.Tests
 
         public class Address : IAddress
         {
-            public string PersonTitle { get; set; }
-            public string PersonFirstName { get; set; }
-            public string PersonMiddleName { get; set; }
-            public string PersonLastName { get; set; }
+            public string PersonName { get; set; }
             public string CompanyName { get; set; }
             public string Line1 { get; set; }
             public string Line2 { get; set; }

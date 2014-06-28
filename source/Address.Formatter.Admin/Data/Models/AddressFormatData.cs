@@ -23,7 +23,7 @@ namespace Address.Formatter.Admin.Data.Models
             {
                 ToTable("AddressFormats");
 
-                HasMany(o => o.Countries).WithMany();
+                HasMany(o => o.Countries).WithRequired(o=>o.AddressFormat);
                 HasMany(o => o.Lines).WithRequired();
             }
         }

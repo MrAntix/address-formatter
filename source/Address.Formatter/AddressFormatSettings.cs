@@ -15,10 +15,7 @@ namespace Address.Formatter
             var builder = new AddressFormatBuilder();
             builder
                 .Address(
-                    f => f.Line(l => l.Element(a => a.PersonTitle)
-                                      .Element(a => a.PersonFirstName)
-                                      .Element(a => a.PersonMiddleName)
-                                      .Element(a => a.PersonLastName))
+                    f => f.Line(l => l.Element(a => a.PersonName))
                           .Line(l => l.Element(a => a.CompanyName))
                           .Line(l => l.Element(a => a.Line1))
                           .Line(l => l.Element(a => a.Line2))
@@ -30,10 +27,7 @@ namespace Address.Formatter
                     string.Empty, "GB"
                 )
                 .Address(
-                    f => f.Line(l => l.Element(a => a.PersonTitle)
-                                      .Element(a => a.PersonFirstName)
-                                      .Element(a => a.PersonMiddleName)
-                                      .Element(a => a.PersonLastName))
+                    f => f.Line(l => l.Element(a => a.PersonName))
                           .Line(l => l.Element(a => a.CompanyName))
                           .Line(l => l.Element(a => a.Line1))
                           .Line(l => l.Element(a => a.Line2))
@@ -53,18 +47,12 @@ namespace Address.Formatter
                           .Line(l => l.Element(a => a.Line2))
                           .Line(l => l.Element(a => a.Line3))
                           .Line(l => l.Element(a => a.CompanyName))
-                          .Line(l => l.Element(a => a.PersonTitle)
-                                      .Element(a => a.PersonFirstName)
-                                      .Element(a => a.PersonMiddleName)
-                                      .Element(a => a.PersonLastName)),
+                          .Line(l => l.Element(a => a.PersonName)),
                     "BG"
                 )
                 .Address(
                     f => f.Line(l => l.Element(a => a.CompanyName))
-                          .Line(l => l.Element(a => a.PersonTitle)
-                                      .Element(a => a.PersonFirstName)
-                                      .Element(a => a.PersonMiddleName)
-                                      .Element(a => a.PersonLastName))
+                          .Line(l => l.Element(a => a.PersonName))
                           .Line(l => l.Element(a => a.Line1))
                           .Line(l => l.Element(a => a.Line2))
                           .Line(l => l.Element(a => a.Line3))
@@ -75,10 +63,7 @@ namespace Address.Formatter
                     "BR"
                 )
                 .Address(
-                    f => f.Line(l => l.Element(a => a.PersonTitle)
-                                      .Element(a => a.PersonFirstName)
-                                      .Element(a => a.PersonMiddleName)
-                                      .Element(a => a.PersonLastName))
+                    f => f.Line(l => l.Element(a => a.PersonName))
                           .Line(l => l.Element(a => a.CompanyName))
                           .Line(l => l.Element(a => a.Line1))
                           .Line(l => l.Element(a => a.Line2))
@@ -90,10 +75,7 @@ namespace Address.Formatter
                     "CA"
                 )
                 .Address(
-                    f => f.Line(l => l.Element(a => a.PersonTitle)
-                                      .Element(a => a.PersonFirstName)
-                                      .Element(a => a.PersonMiddleName)
-                                      .Element(a => a.PersonLastName))
+                    f => f.Line(l => l.Element(a => a.PersonName))
                           .Line(l => l.Element(a => a.CompanyName))
                           .Line(l => l.Element(a => a.Line1))
                           .Line(l => l.Element(a => a.Line2))
@@ -105,10 +87,7 @@ namespace Address.Formatter
                     "CN"
                 )
                 .Address(
-                    f => f.Line(l => l.Element(a => a.PersonTitle)
-                                      .Element(a => a.PersonFirstName)
-                                      .Element(a => a.PersonMiddleName)
-                                      .Element(a => a.PersonLastName))
+                    f => f.Line(l => l.Element(a => a.PersonName))
                           .Line(l => l.Element(a => a.CompanyName))
                           .Line(l => l.Element(a => a.Line1))
                           .Line(l => l.Element(a => a.Line2))
@@ -121,10 +100,7 @@ namespace Address.Formatter
                 )
                 .Address(
                     f => f.Line(l => l.Element(a => a.CompanyName))
-                          .Line(l => l.Element(a => a.PersonTitle)
-                                      .Element(a => a.PersonFirstName)
-                                      .Element(a => a.PersonMiddleName)
-                                      .Element(a => a.PersonLastName))
+                          .Line(l => l.Element(a => a.PersonName))
                           .Line(l => l.Element(a => a.Line1))
                           .Line(l => l.Element(a => a.Line2))
                           .Line(l => l.Element(a => a.Line3))

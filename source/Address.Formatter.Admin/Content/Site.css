@@ -41,8 +41,8 @@ body {
 .element > div {
   border-radius: 4px;
   padding: 5px;
-  background-color: #d9edf7;
-  color: #31708f;
+  background-color: #dddddd;
+  color: #333333;
 }
 .element.on-drag-hover {
   padding-left: 60px;

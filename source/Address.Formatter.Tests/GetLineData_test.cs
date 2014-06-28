@@ -13,7 +13,7 @@ namespace Address.Formatter.Tests
             Assert.Null(
                 AddressFormatter.GetLineData(
                     GetFormatLine(),
-                    GetAddress(null, null, null, null)
+                    GetAddress(null, null)
                     ));
         }
 
@@ -23,7 +23,7 @@ namespace Address.Formatter.Tests
             Assert.Null(
                 AddressFormatter.GetLineData(
                     GetFormatLine(),
-                    GetAddress(string.Empty, string.Empty, string.Empty, string.Empty)
+                    GetAddress(string.Empty, string.Empty)
                     ));
         }
 
@@ -33,7 +33,7 @@ namespace Address.Formatter.Tests
             Assert.Null(
                 AddressFormatter.GetLineData(
                     GetFormatLine(),
-                    GetAddress(" ", " ", " ", " ")
+                    GetAddress(" ", " ")
                     ));
         }
 
@@ -44,7 +44,7 @@ namespace Address.Formatter.Tests
                 "PrefixXXXXSuffix" + Environment.NewLine,
                 AddressFormatter.GetLineData(
                     GetFormatLine(),
-                    GetAddress(string.Empty, "XXXX", null, null)
+                    GetAddress(string.Empty, "XXXX")
                     ));
         }
 
@@ -57,7 +57,7 @@ namespace Address.Formatter.Tests
                 );
 
             Assert.Equal(
-                "PrefixTitleSuffix PrefixFirstNameSuffix PrefixMiddleNameSuffix PrefixLastNameSuffix" +
+                "PrefixPersonNameSuffix PrefixCompanyNameSuffix" +
                 Environment.NewLine, result);
         }
 
@@ -66,23 +66,19 @@ namespace Address.Formatter.Tests
         {
             var result = AddressFormatter.GetLineData(
                 GetFormatLine(),
-                GetAddress(middleName: null)
+                GetAddress(companyName: null)
                 );
 
-            Assert.Equal("PrefixTitleSuffix PrefixFirstNameSuffix PrefixLastNameSuffix" + Environment.NewLine, result);
+            Assert.Equal("PrefixPersonNameSuffix" + Environment.NewLine, result);
         }
 
         static IAddress GetAddress(
-            string title = "Title",
-            string firstName = "FirstName",
-            string middleName = "MiddleName",
-            string lastName = "LastName")
+            string personName = "PersonName",
+            string companyName = "CompanyName")
         {
             var mock = new Mock<IAddress>();
-            mock.SetupGet(o => o.PersonTitle).Returns(title);
-            mock.SetupGet(o => o.PersonFirstName).Returns(firstName);
-            mock.SetupGet(o => o.PersonMiddleName).Returns(middleName);
-            mock.SetupGet(o => o.PersonLastName).Returns(lastName);
+            mock.SetupGet(o => o.PersonName).Returns(personName);
+            mock.SetupGet(o => o.CompanyName).Returns(companyName);
 
             return mock.Object;
         }
@@ -90,10 +86,8 @@ namespace Address.Formatter.Tests
         static AddressFormatLine GetFormatLine()
         {
             return new AddressFormatBuilder.LineBuilder()
-                .Line(e => e.Element(a => a.PersonTitle, prefix: "Prefix", suffix: "Suffix")
-                            .Element(a => a.PersonFirstName, prefix: "Prefix", suffix: "Suffix")
-                            .Element(a => a.PersonMiddleName, prefix: "Prefix", suffix: "Suffix")
-                            .Element(a => a.PersonLastName, prefix: "Prefix", suffix: "Suffix"))
+                .Line(e => e.Element(a => a.PersonName, prefix: "Prefix", suffix: "Suffix")
+                            .Element(a => a.CompanyName, prefix: "Prefix", suffix: "Suffix"))
                 .Build().Single();
         }
     }

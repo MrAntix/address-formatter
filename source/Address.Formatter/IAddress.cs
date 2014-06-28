@@ -2,10 +2,7 @@
 {
     public interface IAddress
     {
-        string PersonTitle { get; }
-        string PersonFirstName { get; }
-        string PersonMiddleName { get; }
-        string PersonLastName { get; }
+        string PersonName { get; }
 
         string CompanyName { get; }
 

@@ -37,6 +37,10 @@ namespace Address.Formatter.Admin.Configuration
                 Component.For<IFormatStore, FormatStore>()
                          .LifestyleTransient()
                 );
+            container.Register(
+                Component.For<ICountryStore, CountryStore>()
+                         .LifestyleTransient()
+                );
         }
 
         static void RegisterWebApi(

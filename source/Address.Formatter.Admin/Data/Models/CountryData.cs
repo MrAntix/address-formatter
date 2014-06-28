@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace Address.Formatter.Admin.Data.Models
 {
@@ -7,7 +6,7 @@ namespace Address.Formatter.Admin.Data.Models
     {
         public int Id { get; set; }
         public string ISO3 { get; set; }
-        public List<AddressFormatData> AddressFormats { get; set; }
+        public AddressFormatData AddressFormat { get; set; }
 
         public class Configuration : EntityTypeConfiguration<CountryData>
         {
@@ -16,7 +15,7 @@ namespace Address.Formatter.Admin.Data.Models
                 ToTable("Counties");
 
                 Property(o => o.ISO3).HasMaxLength(3);
-                HasMany(o => o.AddressFormats).WithMany();
+                HasOptional(o => o.AddressFormat).WithMany(o => o.Countries);
             }
         }
     }

@@ -1,26 +1,26 @@
 ﻿using System.Linq;
 using Address.Formatter.Admin.Api.Formats.Models;
 using Address.Formatter.Admin.Data.Models;
-using Address.Formatter.Admin.Resources;
 
 namespace Address.Formatter.Admin.Api.Formats
 {
     public static class FormatMapper
     {
         const int MAX_LINES = 9;
+
         public static AddressFormat ToModel(this AddressFormatData data)
         {
             var model = new AddressFormat
                 {
                     Id = data.Id,
-                    Countries = data.Countries.Select(ToModel),
+                    Countries = data.Countries.Select(CountryMapper.ToModel),
                     Lines = data.Lines.Select(ToModel)
                 };
 
             model.AllElements =
                 new[]
                     {
-                        "PersonTitle", "PersonFirstName", "PersonMiddleName", "PersonLastName",
+                        "PersonName",
                         "CompanyName",
                         "Line1", "Line2", "Line3", "City", "State",
                         "CountryCode", "CountryName", "PostalCode"
@@ -29,26 +29,14 @@ namespace Address.Formatter.Admin.Api.Formats
                     .Select(p => new AddressFormatElement {Name = p})
                     .ToArray();
 
-            if (model.Lines.Count() < MAX_LINES)
-            {
-                model.Lines =
-                    model.Lines
-                         .Concat(
-                             Enumerable.Range(1, MAX_LINES)
-                                       .Select(i => new AddressFormatLine())
-                        ).Take(MAX_LINES);
-            }
+            model.Lines =
+                model.Lines
+                     .Concat(
+                         Enumerable.Range(1, MAX_LINES)
+                                   .Select(i => new AddressFormatLine())
+                    ).Take(MAX_LINES);
 
             return model;
-        }
-
-        public static Country ToModel(this CountryData data)
-        {
-            return new Country
-                {
-                    Id = data.Id,
-                    Name = CountryResources.ResourceManager.GetString(data.ISO3)
-                };
         }
 
         public static AddressFormatLine ToModel(this AddressFormatLineData data)

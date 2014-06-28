@@ -1,7 +1,17 @@
-﻿<div class="panel panel-default" ng-show="$parent.selected">
+﻿<div class="panel panel-default" ng-show="show">
 
     <div class="panel-heading">
-        <h2 class="panel-title">{{$parent.selected.display}}</h2>
+        <h2 class="panel-title">
+            <div class="element"
+                 ng-repeat="country in selected.countries">
+                <div>
+                    {{country.name}}
+                    <span aria-hidden="true"
+                          ng-if="selected.countries.length>1"
+                          ng-click="removeFrom(country,selected.countries)">&times;</span>
+                </div>
+            </div>
+        </h2>
     </div>
 
     <div class="panel-body">
@@ -10,19 +20,19 @@
 
             <div class="lines col-xs-9">
                 <div class="line form-control"
-                    ng-repeat="line in $parent.selected.lines">
+                     ng-repeat="line in selected.lines">
                     {{line.prefix}}
                     <div class="element"
-                        ui-draggable="true" drag="element"
-                        on-drop-success="remove(element, line.elements)"
-                        ui-on-drop="drop($data,line,element)"
-                        ng-repeat="element in line.elements">
+                         ui-draggable="true" drag="element"
+                         on-drop-success="removeFrom(element, line.elements)"
+                         ui-on-drop="drop($data,line,element)"
+                         ng-repeat="element in line.elements">
                         <div>
                             {{element.prefix}}
                             &lt;{{element.name}}&gt;
                             {{element.suffix}}
                             <span aria-hidden="true"
-                                ng-click="clear(element,line.elements)">&times;</span>
+                                  ng-click="clearElement(element,line.elements)">&times;</span>
                         </div>
                     </div>
                     {{line.suffix}}
@@ -37,12 +47,12 @@
 
         <div class="form-group">
             <div class="element"
-                ui-draggable="true" drag="element" on-drop-success="remove(element,$parent.selected.allElements)"
-                ng-repeat="element in $parent.selected.allElements">
+                 ui-draggable="true" drag="element" on-drop-success="removeFrom(element,selected.allElements)"
+                 ng-repeat="element in selected.allElements">
                 <div>
                     {{element.prefix}}
                     &lt;{{element.name}}&gt;
-                        {{element.suffix}}
+                    {{element.suffix}}
                 </div>
             </div>
         </div>
@@ -50,6 +60,9 @@
     </div>
 
     <div class="panel-footer">
-        <button class="btn btn-danger" ng-click="delete()">Delete</button>
+        <button class="btn btn-danger"
+                ng-disabled="!selected.countries.length"
+                ng-click="delete(selected)">
+            Delete</button>
     </div>
 </div>

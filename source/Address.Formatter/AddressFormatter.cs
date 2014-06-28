@@ -81,14 +81,8 @@ namespace Address.Formatter
                 default:
                     throw new NotSupportedException(name);
 
-                case "PersonTitle":
-                    return address.PersonTitle;
-                case "PersonFirstName":
-                    return address.PersonFirstName;
-                case "PersonMiddleName":
-                    return address.PersonMiddleName;
-                case "PersonLastName":
-                    return address.PersonLastName;
+                case "PersonName":
+                    return address.PersonName;
                 case "CompanyName":
                     return address.CompanyName;
                 case "Line1":

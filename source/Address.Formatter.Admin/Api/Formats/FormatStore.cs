@@ -42,7 +42,7 @@ namespace Address.Formatter.Admin.Api.Formats
 
             await _dataContext.SaveChangesAsync();
         }
-        
+
         public async Task Delete(int id)
         {
             var data = await Query.SingleAsync(d => d.Id == id);
