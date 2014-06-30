@@ -8,6 +8,7 @@ namespace Address.Formatter.Admin.Data.Models
         public AddressFormatLineData()
         {
             Elements = new List<AddressFormatElementData>();
+            ElementSeparator = " ";
         }
 
         public int Id { get; set; }

@@ -3,7 +3,7 @@
     <div class="panel-body">
         <div>
             <div class="row">
-                <div class="col-xs-9">
+                <div class="col-xs-8">
                     <h5>Lines</h5>
                     <div class="lines">
                         <div class="line form-control"
@@ -14,7 +14,9 @@
                                 on-drop-success="removeFrom(element, line.elements)"
                                 ui-on-drop="drop($data,line,element)"
                                 ng-repeat="element in line.elements">
-                                <div>
+                                <div
+                                    ng-class="{active:element.isSelected}"
+                                    ng-click="selectElement(element)">
                                     {{element.prefix}}
                                     &lt;{{element.name}}&gt;
                                     {{element.suffix}}
@@ -27,16 +29,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-3">
-                    <h5>Elements</h5>
+                <div class="col-xs-4">
+                    <div ng-show="selectedElement">
+                        <h5>{{selectedElement.name}}</h5>
+                        <div class="form-group">
+                            <input class="form-control"
+                                   ng-model="selectedElement.prefix"
+                                   ng-change="save(selected)"
+                                   ng-trim="false"
+                                placeholder="prefix" />
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control"
+                                   ng-model="selectedElement.suffix"
+                                   ng-change="save(selected)"
+                                   ng-trim="false"
+                                placeholder="suffix"/>
+                        </div>
+                    </div>
                     <div class="elements">
+                        <h5>Elements</h5>
                         <div class="element"
                             ui-draggable="true" drag="element" on-drop-success="removeFrom(element,selected.allElements)"
                             ng-repeat="element in selected.allElements">
                             <div>
                                 {{element.prefix}}
-                    &lt;{{element.name}}&gt;
-                    {{element.suffix}}
+                                &lt;{{element.name}}&gt;
+                                {{element.suffix}}
                             </div>
                         </div>
                     </div>
@@ -45,16 +64,41 @@
             </div>
 
             <div class="row">
-                <div class="countries col-xs-12">
-                    <h5>Countries</h5>
-                    <div class="country"
-                        ng-repeat="country in selected.countries">
-                        <div>
-                            {{country.name}}
-                            <span aria-hidden="true"
-                                ng-if="selected.countries.length>1"
-                                ng-click="removeFrom(country,selected.countries)">&times;</span>
+                <div class="col-xs-6">
+                    <div class="countries">
+                        <h5>Countries</h5>
+                        <div class="btn-group pull-right dropup" dropdown>
+                            <button class="btn btn-default dropdown-toggle">
+                                Select
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu scrolls">
+                                <li
+                                    ng-repeat="country in countries"
+                                    ng-click="selectCountry(country)">
+                                    <a href>{{country.name}}</a>
+                                </li>
+                            </ul>
                         </div>
+
+                        <div class="selectedCountries">
+                            <div class="country"
+                                ng-repeat="country in selected.countries">
+                                <div>
+                                    {{country.name}}
+                                    <span aria-hidden="true"
+                                        ng-click="deselectCountry(country)">&times;</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-6">
+                    <div class="preview">
+                        <h5>Preview</h5>
+                        <address formats-preview="selected" class="well"></address>
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@ body {
 }
 
 .formats-list .list-group{
-    height:327px;
+    max-height:499px;
     overflow:auto;
     overflow-x:hidden;
 }
@@ -63,6 +63,9 @@ body {
     position:absolute;
     left:0;top:0;right:0;bottom:0;
 }
+.element .active{
+    box-shadow:0 0 3px @brand-primary;
+}
 
 .country{
     display:inline-block;
@@ -77,4 +80,22 @@ body {
     border-radius:@border-radius-base;
     padding:@padding-small-vertical;
     border:solid 1px @panel-default-border;
+}
+
+.countries .dropdown-menu,
+.countries .dropdown-menu li,
+.countries .input-group input,
+.countries .input-group button{
+    border:none;
+}
+
+.countries .dropdown-menu li{
+    width:200px;
+    cursor:pointer;
+}
+
+.scrolls{
+    max-height:300px;
+    overflow:auto;
+    overflow-x:hidden;
 }

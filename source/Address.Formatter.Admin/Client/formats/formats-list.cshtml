@@ -1,6 +1,7 @@
 ﻿<div class="form-group">
     <div class="input-group">
-        <input class="form-control" placeholder="search" />
+        <input class="form-control" placeholder="search"
+            ng-model="formatsFilter" />
         <span class="input-group-btn">
             <button class="btn btn-default" type="button">
                 <span class="glyphicon glyphicon-search"></span>
@@ -12,12 +13,13 @@
 <div class="formats-list form-group">
     <div class="list-group">
         <a class="list-group-item" href
-           ng-repeat="format in formats"
-           ng-click="select(format)"
-           ng-class="{active:format==$parent.selected}">
-           {{format | formatDisplay}}
+            ng-repeat="format in formats | filter:formatsFilter"
+            ng-click="select(format)"
+            ng-class="{active:format==selected}">{{format | formatDisplay}}
         </a>
     </div>
+</div>
 
-    <button class="btn btn-primary" ng-click="add()">Add</button>
+<div class="form-group clearfix">
+    <button class="btn btn-primary pull-right" ng-click="add()">Add</button>
 </div>

@@ -7,6 +7,7 @@ namespace Address.Formatter.Admin.Api.Formats.Models
         public AddressFormatLine()
         {
             Elements = new AddressFormatElement[] {};
+            ElementSeparator = " ";
         }
 
         public IEnumerable<AddressFormatElement> Elements { get; set; }

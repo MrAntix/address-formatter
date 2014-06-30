@@ -10,16 +10,8 @@ angular.module('formatsListDirectiveModule', [
                 return {
                     restrict: 'A',
                     replace: false,
-                    templateUrl: '/Client/formats/formats-list.html'
+                    templateUrl: '/Client/formats/formats-list.cshtml'
                 };
             }
-        ])
+        ]);
 
-    .filter('formatDisplay', function () {
-        return function (item) {
-            return item.countries
-                .map(function (c) { return c.name; })
-                .join(', ')
-                || "(default)";
-        };
-    });

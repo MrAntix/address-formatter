@@ -22,7 +22,7 @@ namespace Address.Formatter.Admin.Configuration
                 new ScriptBundle("~/bundles/scripts")
                     .Include("~/Scripts/angular.js")
                     .Include("~/Scripts/angular-resource.js")
-                   // .Include("~/Scripts/angular-touch.js")
+                // .Include("~/Scripts/angular-touch.js")
                     .Include("~/Scripts/angular-cookies.js")
                    // .Include("~/Scripts/angular-animate.js")
                     .Include("~/Scripts/angular-ui/ui-bootstrap.js")
