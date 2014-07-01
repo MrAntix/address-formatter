@@ -79,11 +79,11 @@ body {
   border: none;
 }
 .countries .dropdown-menu li {
-  width: 200px;
   cursor: pointer;
 }
 .scrolls {
   max-height: 300px;
   overflow: auto;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }

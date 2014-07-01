@@ -191,6 +191,9 @@ angular.module('formatsModule', [
 
                     var text = e(line.prefix).concat(
                         line.elements.map(function(element) {
+                            var value = e(address[element.name]);
+                            if (value.trim().length == 0) return '';
+
                             return e(element.prefix).concat(
                                 e(address[element.name]),
                                 e(element.suffix)
