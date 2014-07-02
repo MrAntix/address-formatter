@@ -63,8 +63,10 @@ body {
     position:absolute;
     left:0;top:0;right:0;bottom:0;
 }
-.element .active{
-    box-shadow:0 0 3px @brand-primary;
+.line.active,
+.element .active {
+    background-color: @component-active-bg;
+    color: @component-active-color;
 }
 
 .country{

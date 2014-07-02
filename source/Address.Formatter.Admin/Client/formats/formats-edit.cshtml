@@ -1,13 +1,15 @@
-﻿<div class="panel panel-default" ng-show="show">
+﻿<div ng-show="show">
 
-    <div class="panel-body">
+    <div>
         <div>
             <div class="row">
                 <div class="col-xs-8">
-                    <h5>Lines</h5>
+                    <h5>Editor</h5>
                     <div class="lines">
                         <div class="line form-control"
-                            ng-repeat="line in selected.lines">
+                            ng-repeat="line in selected.lines"
+                            ng-class="{active:line.isSelected}"
+                            ng-click="selectLine($event, line)">
                             {{line.prefix}}
                             <div class="element"
                                 ui-draggable="true" drag="element"
@@ -16,7 +18,7 @@
                                 ng-repeat="element in line.elements">
                                 <div
                                     ng-class="{active:element.isSelected}"
-                                    ng-click="selectElement(element)">
+                                    ng-click="selectElement($event, element)">
                                     {{element.prefix}}
                                     &lt;{{element.name}}&gt;
                                     {{element.suffix}}
@@ -30,25 +32,54 @@
                     </div>
                 </div>
                 <div class="col-xs-4">
-                    <div ng-show="selectedElement">
-                        <h5>{{selectedElement.name}}</h5>
-                        <div class="form-group">
-                            <input class="form-control"
-                                   ng-model="selectedElement.prefix"
-                                   ng-change="save(selected)"
-                                   ng-trim="false"
-                                placeholder="prefix" />
+                    <div>
+                        <h5>Properties</h5>
+                        <p class="text-muted small"
+                           ng-hide="selectedElement || selectedLine">select an element or line on the editor to change prefixes etc.</p>
+                        <div ng-show="selectedElement">
+                            <h6>{{selectedElement.name}}</h6>
+                            <div class="form-group">
+                                <input class="form-control"
+                                    ng-model="selectedElement.prefix"
+                                    ng-change="save(selected)"
+                                    ng-trim="false"
+                                    placeholder="prefix" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control"
+                                    ng-model="selectedElement.suffix"
+                                    ng-change="save(selected)"
+                                    ng-trim="false"
+                                    placeholder="suffix" />
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <input class="form-control"
-                                   ng-model="selectedElement.suffix"
-                                   ng-change="save(selected)"
-                                   ng-trim="false"
-                                placeholder="suffix"/>
+                        <div ng-show="selectedLine">
+                            <div class="form-group">
+                                <input class="form-control"
+                                    ng-model="selectedLine.prefix"
+                                    ng-change="save(selected)"
+                                    ng-trim="false"
+                                    placeholder="prefix" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control"
+                                    ng-model="selectedLine.elementSeparator"
+                                    ng-change="save(selected)"
+                                    ng-trim="false"
+                                    placeholder="separator" />
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control"
+                                    ng-model="selectedLine.suffix"
+                                    ng-change="save(selected)"
+                                    ng-trim="false"
+                                    placeholder="suffix" />
+                            </div>
                         </div>
                     </div>
                     <div class="elements">
                         <h5>Elements</h5>
+                        <p ng-hide="selectedElement" class="text-muted small">drag elements to the editor</p>
                         <div class="element"
                             ui-draggable="true" drag="element" on-drop-success="removeFrom(element,selected.allElements)"
                             ng-repeat="element in selected.allElements">
@@ -105,7 +136,8 @@
         </div>
     </div>
 
-    <div class="panel-footer">
+    <hr />
+    <div>
         <button class="btn btn-danger"
             ng-disabled="!selected.countries.length"
             ng-click="delete(selected)">

@@ -38,14 +38,25 @@ angular.module('formatsModule', [
                     $scope.selected = format;
                     $scope.show = true;
 
-                    $scope.selectElement(null);
+                    selectElement(null);
+                    selectLine(null);
                 };
 
-                $scope.selectElement = function(element) {
+                $scope.selectElement = function (e, element) {
                     $log.debug('FormatsController.selectElement');
 
+                    if ($scope.selectedLine) selectLine(null);
+
+                    selectElement(element);
+
+                    e.stopPropagation();
+                };
+
+                var selectElement = function(element) {
                     if ($scope.selectedElement == element)
                         element = null;
+
+                    $log.debug('FormatsController.selectElement '+JSON.stringify(element));
 
                     if ($scope.selectedElement)
                         $scope.selectedElement.isSelected = false;
@@ -53,6 +64,30 @@ angular.module('formatsModule', [
                     $scope.selectedElement = element;
                     if ($scope.selectedElement)
                         $scope.selectedElement.isSelected = true;
+                };
+
+                $scope.selectLine = function (e, line) {
+                    $log.debug('FormatsController.selectLine');
+
+                    if ($scope.selectedElement) selectElement(null);
+
+                    selectLine(line);
+
+                    e.stopPropagation();
+                };
+
+                var selectLine = function(line) {
+                    if ($scope.selectedLine == line)
+                        line = null;
+
+                    $log.debug('FormatsController.selectLine '+JSON.stringify(line));
+
+                    if ($scope.selectedLine)
+                        $scope.selectedLine.isSelected = false;
+
+                    $scope.selectedLine = line;
+                    if ($scope.selectedLine)
+                        $scope.selectedLine.isSelected = true;
                 };
 
                 $scope.add = function() {

@@ -15,7 +15,9 @@ namespace Address.Formatter.Admin.Data.Models
                 ToTable("Counties");
 
                 Property(o => o.ISO3).HasMaxLength(3);
-                HasOptional(o => o.AddressFormat).WithMany(o => o.Countries);
+                HasOptional(o => o.AddressFormat)
+                    .WithMany(o => o.Countries)
+                    .WillCascadeOnDelete(false);
             }
         }
     }

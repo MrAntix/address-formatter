@@ -57,8 +57,10 @@ body {
   right: 0;
   bottom: 0;
 }
+.line.active,
 .element .active {
-  box-shadow: 0 0 3px #428bca;
+  background-color: #428bca;
+  color: #ffffff;
 }
 .country {
   display: inline-block;
