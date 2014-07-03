@@ -13,13 +13,13 @@ namespace Address.Formatter.Admin.Configuration
                 );
 
             bundles
-                .Add(new StyleBundle("~/bundles/styles")
+                .Add(new StyleBundle("~/bundles/style")
                          .Include("~/Content/bootstrap.css")
                          .Include("~/Content/site.css")
                 );
 
             bundles.Add(
-                new ScriptBundle("~/bundles/scripts")
+                new ScriptBundle("~/bundles/script")
                     .Include("~/Scripts/angular.js")
                     .Include("~/Scripts/angular-resource.js")
                 // .Include("~/Scripts/angular-touch.js")

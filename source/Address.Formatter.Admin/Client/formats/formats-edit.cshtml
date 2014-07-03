@@ -23,7 +23,7 @@
                                     &lt;{{element.name}}&gt;
                                     {{element.suffix}}
                                     <span aria-hidden="true"
-                                        ng-click="clearElement(element,line.elements)">&times;</span>
+                                        ng-click="clearElement($event, element,line.elements)">&times;</span>
                                 </div>
                             </div>
                             {{line.suffix}}
@@ -95,8 +95,8 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-6">
-                    <div class="countries">
+                <div class="col-md-6">
+                    <div class="countries clearfix">
                         <h5>Countries</h5>
                         <div class="btn-group pull-right dropup" dropdown>
                             <button class="btn btn-default dropdown-toggle">
@@ -126,7 +126,7 @@
                 </div>
 
 
-                <div class="col-xs-6">
+                <div class="col-md-6">
                     <div class="preview">
                         <h5>Preview</h5>
                         <address formats-preview="selected" class="well"></address>
@@ -136,8 +136,7 @@
         </div>
     </div>
 
-    <hr />
-    <div>
+    <div class="footer">
         <button class="btn btn-danger"
             ng-disabled="!selected.countries.length"
             ng-click="delete(selected)">

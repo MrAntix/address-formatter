@@ -157,16 +157,21 @@ angular.module('formatsModule', [
 
                 $scope.deselectCountry = function(country) {
                     $scope.countries.push(country);
+                    $scope.countries.sort(function (a, b) {
+                        return a.name > b.name ? 1 : a.name < b.name ? -1 : 0;
+                    });
                     $scope.removeFrom(country, $scope.selected.countries);
                 };
 
-                $scope.clearElement = function(element, list) {
+                $scope.clearElement = function(e, element, list) {
                     $log.debug('FormatsController.clearElement');
 
                     $scope.removeFrom(element, list);
                     $scope.selected.allElements.push(element);
 
                     $scope.save($scope.selected);
+
+                    e.stopPropagation();
                 };
 
                 $scope.save = function(format) {
@@ -218,6 +223,8 @@ angular.module('formatsModule', [
     }])
     .filter('formatAddress', ['$sce', function($sce) {
         return function (address, format) {
+            if (!format) return '';
+
             var e = function (v) { return v ? v : ''; };
 
             var output =
