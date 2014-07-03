@@ -1,7 +1,8 @@
 ﻿'use strict';
 
 angular.module('formatsEditDirectiveModule', [
-    'ngDragDrop'
+    'ngDragDrop',
+    'confirm'
 ])
     .directive(
         'formatsEdit',

@@ -108,6 +108,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Client\confirm\module.js" />
+    <Content Include="Client\confirm\templates\dialog.html" />
     <Content Include="Client\formats\formats-edit.cshtml" />
     <Content Include="Client\formats\formats-preview.cshtml" />
     <Content Include="Client\formats\formats-preview-directive.js" />
