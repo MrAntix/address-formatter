@@ -1,10 +1,22 @@
-body {
+﻿body {
   padding-top: 60px;
 }
 .formats-list .list-group {
-  max-height: 499px;
+  height: 472px;
   overflow: auto;
   overflow-x: hidden;
+  border: solid 1px #cccccc;
+  border-radius: 4px;
+}
+.formats-list .list-group-item {
+  border: none;
+  border-top: solid 1px #cccccc;
+}
+.formats-list .list-group-item:first-child {
+  border-top: none;
+}
+.formats-edit-body {
+  height: 570px;
 }
 .lines > div {
   margin-bottom: -1px;
@@ -81,9 +93,10 @@ body {
   -webkit-overflow-scrolling: touch;
 }
 .footer {
-  position: absolute;
-  border-top: solid 1px #dddddd;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: solid 1px #eeeeee;
   height: 60px;
   width: 100%;
-  padding-top: 10px;
 }
+/*# sourceMappingURL=Site.css.map */

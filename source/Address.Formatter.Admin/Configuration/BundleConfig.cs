@@ -14,7 +14,7 @@ namespace Address.Formatter.Admin.Configuration
 
             bundles
                 .Add(new StyleBundle("~/bundles/style")
-                         .Include("~/Content/bootstrap.css")
+                         .Include("~/Content/bootstrap.slate.css")
                          .Include("~/Content/site.css")
                 );
 
